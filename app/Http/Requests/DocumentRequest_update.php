@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class DocumentRequest_update extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'name' => ['required', 'string', 'max:255','min:2'],
+            'description' => ['required', 'string','min:2'],
+            'type' => 'mimes:pdf',
+            'Exp_date'=>'required',
+            
+           
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'الاسم مطلوب.',
+            'name.min'=>'يجب ان يحتوي  الاسم على حرفين على الاقل',
+            'name.string'=>'يجب ان يحتوي الاسم على الاحرف فقط',
+            'description.required' => '  الوصف مطلوب.',
+            'description.min'=>'يجب ان يحتوي   الوصف على حرفين على الاقل',
+            'type.mimes'=>'يجب ان يكون الملف pdf فقط',
+            'Exp_date.required'=>'  تاريخ الانتهاء مطلوب',
+           
+        ];
+    }
+}
